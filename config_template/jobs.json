@@ -1,0 +1,13 @@
+{
+    "job_specifications": [
+        {
+            "id": "tpc-ds-job",
+            "tasks": [
+                {
+                    "image": "tonyabell/tpc-ds-docker",
+                    "command": "azcopy --help"
+                }
+            ]
+        }
+    ]
+}
