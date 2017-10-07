@@ -7,7 +7,7 @@ RUN tar -xf ~/azcopy.tar.gz -C ~/ && ~/install.sh && mkdir /tpc && rm -r ~/azcop
 COPY --from=build-env /tpc-ds/tools/tpcds.idx /tpc
 COPY --from=build-env /tpc-ds/tools/dsdgen /tpc
 
-WORKDIR /tpc 
+COPY run.sh . 
 
 
 
