@@ -11,7 +11,7 @@ echo -e "Storage Account: \t" $storageAccountName
 if [ $(az group exists -n $rg)  != "true" ]
 then
     echo -e "creating resource group: \t" $rg    
-    az group create -n $rg -l $location
+    az group create -n $rg -l $location > /dev/null
 fi
 
 az batch account create -g $rg -n $batchAccountName -l $location > /dev/null
@@ -40,7 +40,6 @@ if [ ! -d ./config ]
 then
     mkdir ./config
 fi
-
 
 credentials=$(cat ./config_template/credentials.json | jq '.credentials.batch.account_key=env.batchAccountKey' | jq '.credentials.batch.account_service_url=env.batchAccountEndpoint' | jq '.credentials.storage.mystorageaccount.account_key=env.storageKey' | jq '.credentials.storage.mystorageaccount.account=env.storageAccountName' )
 
