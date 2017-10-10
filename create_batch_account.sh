@@ -1,8 +1,8 @@
 #!/bin/bash
 export location=westus2
-export rg=tpc-batch-test-1-rg
-export batchAccountName=tpcbatchtest1
-export storageAccountName=tpcbatchtest1
+export rg=tpc-batch-test-4-rg
+export batchAccountName=tpcbatchtest4
+export storageAccountName=tpcbatchtest4
 echo -e "Location: \t\t" $location
 echo -e "Resource Group: \t" $rg
 echo -e "Batch Account: \t\t" $batchAccountName
@@ -36,6 +36,11 @@ echo -e "\tBatch Account Endpoint \t" $batchAccountEndpoint
 echo -e "\tStorage Account Name \t" $storageAccountName
 echo -e "\tStorage Account Key \t" $storageKey
 
+if [ ! -d ./config ]
+then
+    mkdir ./config
+fi
+
 
 credentials=$(cat ./config_template/credentials.json | jq '.credentials.batch.account_key=env.batchAccountKey' | jq '.credentials.batch.account_service_url=env.batchAccountEndpoint' | jq '.credentials.storage.mystorageaccount.account_key=env.storageKey' | jq '.credentials.storage.mystorageaccount.account=env.storageAccountName' )
 
@@ -44,3 +49,6 @@ echo $credentials > ./config/credentials.json
 cp ./config_template/config.json ./config/
 cp ./config_template/pool.json ./config/
 cp ./config_template/jobs.json ./config/
+
+
+# cat ./config_template/jobs.json | jq .job_specifications

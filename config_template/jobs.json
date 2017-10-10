@@ -1,11 +1,29 @@
 {
     "job_specifications": [
         {
-            "id": "tpc-ds-job",
+            "id": "tpc-ds-job",       
+            "environment_variables": {
+                "scale": "1",
+                "parallel": "20",
+                "storageAccountName": "datasetsrbnzdb",
+                "container": "tpcdata",
+                "storageAccountKey": "475rgQCmHSTG0EEFAcidvwvvRFiz01WXcb3akxkowouEgfjuawG8RtH3/kBvKfCsHEGoMArxTCRSiOVErF0t0A=="
+            },
             "tasks": [
                 {
+                    "task_factory": {
+                        "parametric_sweep": {
+                            "product": [
+                                {
+                                    "start": 1,
+                                    "stop": 21,
+                                    "step": 1
+                                }
+                            ]
+                        }
+                    },
                     "image": "tonyabell/tpc-ds-docker",
-                    "command": "azcopy --help"
+                    "command": "/run.sh {0}"
                 }
             ]
         }

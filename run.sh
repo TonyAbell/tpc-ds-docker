@@ -1,10 +1,10 @@
 #!/bin/bash
-scale=$1
-parallel=$2
-child=$3
-storageAccountName=$4
-container=$5
-storageAccountKey=$6
+# scale=$1
+#parallel=$2
+child=$1
+#storageAccountName=$4
+#container=$5
+#storageAccountKey=$6
 baseDir=/data
 echo -e "\n\n"
 echo -e "Scale:\t\t\t"$scale  
@@ -51,7 +51,7 @@ do
       tableDir=$baseDir/$t
       if [ ! -d $tableDir ]
       then
-	  mkdir $tableDir
+	    mkdir $tableDir
       fi
       
       mv $file $tableDir
@@ -62,11 +62,14 @@ echo -e "\n\nCopy Data To Azure Blob Store\n"
 tablesToCopy=("${tables[@]}" "${tableReturns[@]}" )
 for t in "${tablesToCopy[@]}" 
 do
-    echo -e "\t"$t
-    destUrl=$(echo -e "https://"$storageAccountName".blob.core.windows.net/"$container"/"$t)
     tableDir=$baseDir/$t
-    echo -e "\t\tDestination Url:" $destUrl "\n"
-    azcopy --exclude-older --quiet --source $tableDir --destination $destUrl --dest-key $storageAccountKey --include "*.dat"
-    echo -e "\n\n"
+    if [ -d $tableDir ] && [ "$(ls -A $tableDir)" ]
+    then
+        echo -e "\t"$t
+        destUrl=$(echo -e "https://"$storageAccountName".blob.core.windows.net/"$container"/"$t)
+        echo -e "\t\tDestination Url:" $destUrl "\n"
+        azcopy --exclude-older --quiet --source $tableDir --destination $destUrl --dest-key $storageAccountKey --include "*.dat"
+        echo -e "\n\n"
+    fi
 done
-
+exit 0
