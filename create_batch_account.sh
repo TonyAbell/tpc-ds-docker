@@ -1,8 +1,8 @@
 #!/bin/bash
 export location=westus2
-export rg=tpc-batch-test-4-rg
-export batchAccountName=tpcbatchtest4
-export storageAccountName=tpcbatchtest4
+export rg=tpc-batch-test-1-rg
+export batchAccountName=tpcbatchtest1
+export storageAccountName=tpcbatchtest1
 echo -e "Location: \t\t" $location
 echo -e "Resource Group: \t" $rg
 echo -e "Batch Account: \t\t" $batchAccountName
