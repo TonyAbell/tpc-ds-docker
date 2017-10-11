@@ -5,9 +5,9 @@
             "environment_variables": {
                 "scale": "1",
                 "parallel": "20",
-                "storageAccountName": "datasetsrbnzdb",
-                "container": "tpcdata",
-                "storageAccountKey": "475rgQCmHSTG0EEFAcidvwvvRFiz01WXcb3akxkowouEgfjuawG8RtH3/kBvKfCsHEGoMArxTCRSiOVErF0t0A=="
+                "storageAccountName": "<Storage Account Name>",
+                "container": "<Storage Account Container>",
+                "storageAccountKey": "<Storage Account Key>"
             },
             "tasks": [
                 {
