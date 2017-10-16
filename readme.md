@@ -1,6 +1,9 @@
 Read Me
 =
 
+This script will generate data from [TPC DS](http://www.tpc.org/tpcds/) using Azure Batch. The goal is to generate the desired scale for TPC DS without having to download / build and run the tool on a single machine.  Once the batch jobs are finished running you should delete the resource group to remove resourced which are not needed.
+
+
 Clone This Repo
 -
 
@@ -32,9 +35,15 @@ Run `create_batch_account.sh` with the following parameters
 - Container: The container where the data will be saved
 - Storage Account Key: Key for Storage account specified eariler
 
-Exmaple
+Note: make sure that [azure cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) and [jq](https://stedolan.github.io/jq/) are installed.
+
+Example
 
 ```shell
+# login to azure cli
+az login
+
+#run create batch script
 ./create_batch_account.sh <scale> <location> <resource group> <storage account name> <container> <storage account key>
 ```
 
@@ -49,4 +58,4 @@ SHIPYARD_CONFIGDIR=../tpc-ds-docker/config ./shipyard jobs add --tail stdout.txt
 Review Data
 -
 
-The data will be in your stoarge account / container to be ingested by your tool of choice.
+The data will be in your storage account / container to be ingested by your tool of choice.
